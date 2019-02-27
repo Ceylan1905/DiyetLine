@@ -30,7 +30,7 @@ namespace DiyetLine.Controllers
 
         // GET: api/Roller/5
         [HttpGet]
-        [Route("findall/{id}")]
+        [Route("find/{id}")]
         [ResponseType(typeof(Table_Roller))]
         public IHttpActionResult GetTable_Roller(int id)
         {
