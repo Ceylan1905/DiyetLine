@@ -12,6 +12,7 @@ using DiyetLine.Models;
 
 namespace DiyetLine.Controllers
 {
+    //DENEME
     [RoutePrefix("api/Roller")]
     public class RollerController : ApiController
     {
