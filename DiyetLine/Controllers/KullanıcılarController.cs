@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 namespace DiyetLine.Controllers
 {
     [RoutePrefix("api/Kullanıcılar")]
+    [Authorize]
     public class KullanıcılarController : ApiController
     {
         private diyetlineEntities db = new diyetlineEntities();
@@ -32,6 +33,7 @@ namespace DiyetLine.Controllers
         // GET: api/Kullanıcılar/5
         [HttpGet]
         [Route("find/{id}")]
+       
         [ResponseType(typeof(Table_Kullanıcılar))]
         public HttpResponseMessage GetTable_Kullanıcılar(int id)
         {
