@@ -1,0 +1,174 @@
+﻿@model DiyetLine.Models.ViewModel
+
+@{
+    ViewBag.Title = "IsletmeSahibi_UyeOl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #vergi {
+        display: none;
+    }
+     #kimlik {
+        display: none;
+    }
+         
+        
+     }
+</style>
+
+<div class="site-section site-section-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-8 mb-5">
+@using (Html.BeginForm("IsletmeSahibi_UyeOl", "Home", FormMethod.Post))
+{
+    <form action="#" class="p-5 bg-white">
+        <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+                <label class="font-weight-bold" for="rest_adi">Restorant Adı</label>
+
+                @Html.EditorFor(model => model.isletmesahibi.Restorant_Adi, new { htmlAttributes = new { @class = "form-control", @placeholder = "Restorant Adı" } })
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+
+                <label class="font-weight-bold" for="ilce">İl Seçimi</label>
+                @if (ViewBag.illerList != null)
+                {
+                    @Html.DropDownListFor(model => model.IlId, ViewBag.illerList as SelectList, "--il Seçiniz--", new { @class = "form-control" })
+
+                }
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+                <label class="font-weight-bold" for="ilce">İlçe Seçimi</label>
+                @Html.DropDownListFor(model => model.IlceId, new SelectList(""), "--İlçe Seçiniz--", new { @class = "form-control" })
+
+            </div>
+        </div>
+        <div class="row form-group" id="ticari">
+            <div class="col-md-12 mb-3 mb-md-0">
+                <label class="font-weight-bold" for="ticaritur">Ticari Tür</label>
+                <select id="ticaritur" class="form-control">
+                    <option value="secim">Seçiniz</option>
+                    <option value="sahis">Şahıs</option>
+                    <option value="diger">Diğer</option>
+                </select>
+            </div>
+        </div>
+        <div class="row form-group" id="vergi">
+            <div class="col-md-12 mb-3 mb-md-0">
+                @Html.LabelFor(model => model.isletmesahibi.VergiNo, htmlAttributes: new { @class = "font-weight-bold" })
+                @Html.EditorFor(model => model.isletmesahibi.VergiNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Vergi No" } })
+            </div>
+        </div>
+        <div class="row form-group" id="kimlik">
+            <div class="col-md-12 mb-3 mb-md-0">
+                @Html.LabelFor(model => model.isletmesahibi.TCNo, htmlAttributes: new { @class = "font-weight-bold" })
+                @Html.EditorFor(model => model.isletmesahibi.TCNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "TC Kimlik No" } })
+            </div>
+        </div>
+
+        <div class="row form-group mb-4">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.isletmesahibi.Adres, htmlAttributes: new { @class = "font-weight-bold" })
+                @Html.TextAreaFor(model => model.isletmesahibi.Adres, htmlAttributes: new {@class = "form-control", @placeholder = " Adres", @cols = 30,@rows=5 } )
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+                @Html.LabelFor(model => model.isletmesahibi.Restorant_Sahibi, htmlAttributes: new { @class = "font-weight-bold" })
+                @Html.EditorFor(model => model.isletmesahibi.Restorant_Sahibi, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ad-Soyad" } })
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+                <label class="font-weight-bold" for="rest_sahibi">Restorant Sahibi Telefon Numarası</label>
+                @Html.EditorFor(model => model.isletmesahibi.Restorant_SahibiTel, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefon" } })
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+                <label class="font-weight-bold" for="sube_sor">Şube Sorumlusu</label>
+
+                @Html.EditorFor(model => model.isletmesahibi.SubeSorumlusu, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ad-Soyad" } })
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+                <label class="font-weight-bold" for="sube_sor">Şube Sorumlusu Telefon Numarası</label>
+
+                @Html.EditorFor(model => model.isletmesahibi.SubeSorumlusu_Tel, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefon" } })
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+                <label class="font-weight-bold" for="sube_sor">Restorant Telefon Numarası</label>
+
+                @Html.EditorFor(model => model.isletmesahibi.Restorant_Tel, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefon" } })
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+                @Html.LabelFor(model => model.isletmesahibi.Restorant_Email, htmlAttributes: new { @class = "font-weight-bold" })
+
+                @Html.EditorFor(model => model.isletmesahibi.Restorant_Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Kaydol" class="btn btn-primary pill text-white px-5 py-2">
+            </div>
+        </div>
+    </form>
+}
+            </div>
+
+          
+        </div>
+    </div>
+</div>
+<script src=”http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js&#8221; type=”text/javascript”></script>
+<script src="~/Content/js/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("select#ticaritur").change(function () {
+            var data = $("#ticaritur").val();
+            if (data == "sahis") {
+                $("#kimlik").show();
+                $("#vergi").hide();
+            }
+            else if (data == "diger") {
+                $("#vergi").show();
+                $("#kimlik").hide();
+            }
+            else if (data == "secim") {
+                $("#kimlik").hide();
+                $("#vergi").hide();
+            }
+        });
+
+        $("#IlId").change(function () {
+           
+            $.get("/Home/GetIlcelerList", {
+                IlId: $("#IlId").val()
+               
+            }, function (data) {
+                $("#IlceId").empty();
+                    $.each(data, function (index, row) {
+                        $("#IlceId").append("<option value='" + row.id + "'>" + row.ad + "</option>")
+                       
+                    });
+                
+                });
+            })
+
+        });
+       
+</script>
+        
+
+

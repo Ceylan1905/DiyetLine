@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a786a584d9e04eb28fc16b4febf2bf9b" Name="Diagram1">
+        <EntityTypeShape EntityType="diyetlineModel.il" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="diyetlineModel.ilce" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="diyetlineModel.Table_IsletmeSahibi" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="diyetlineModel.Table_Kullanicilar" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="diyetlineModel.Table_Roller" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="diyetlineModel.FK__ilce__il_id__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="diyetlineModel.FK__Table_Isl__il_id__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="diyetlineModel.FK__Table_Isl__ilce___6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="diyetlineModel.FK__Table_Isl__Rol_i__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="diyetlineModel.FK_Table_Kullanicilar_Table_Roller" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

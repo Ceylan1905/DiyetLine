@@ -17,13 +17,16 @@ namespace DiyetLine.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Table_Roller()
         {
-            this.Table_Kullanıcılar = new HashSet<Table_Kullanıcılar>();
+            this.Table_IsletmeSahibi = new HashSet<Table_IsletmeSahibi>();
+            this.Table_Kullanicilar = new HashSet<Table_Kullanicilar>();
         }
     
         public int Sq_id { get; set; }
         public string RolAdi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Table_Kullanıcılar> Table_Kullanıcılar { get; set; }
+        public virtual ICollection<Table_IsletmeSahibi> Table_IsletmeSahibi { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Table_Kullanicilar> Table_Kullanicilar { get; set; }
     }
 }

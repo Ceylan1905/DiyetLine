@@ -16,7 +16,7 @@ namespace DiyetLine.Controllers
     [RoutePrefix("api/Roller")]
     public class RollerController : ApiController
     {
-        private diyetlineEntities db = new diyetlineEntities();
+        private DiyetlineEntities db = new DiyetlineEntities();
         public RollerController()
         {
             db.Configuration.ProxyCreationEnabled = false;

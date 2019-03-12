@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="diyetlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="il">
+          <Key>
+            <PropertyRef Name="Sqid" />
+          </Key>
+          <Property Name="Sqid" Type="int" Nullable="false" />
+          <Property Name="ad" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ilce">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="il_id" Type="int" />
+          <Property Name="ad" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table_IsletmeSahibi">
+          <Key>
+            <PropertyRef Name="Sq_id" />
+          </Key>
+          <Property Name="Sq_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Restorant_Adi" Type="varchar" MaxLength="50" />
+          <Property Name="Restorant_Sahibi" Type="varchar" MaxLength="50" />
+          <Property Name="Restorant_SahibiTel" Type="varchar" MaxLength="50" />
+          <Property Name="SubeSorumlusu" Type="varchar" MaxLength="50" />
+          <Property Name="SubeSorumlusu_Tel" Type="varchar" MaxLength="50" />
+          <Property Name="Restorant_Email" Type="varchar" MaxLength="50" />
+          <Property Name="VergiNo" Type="varchar" MaxLength="50" />
+          <Property Name="TCNo" Type="varchar" MaxLength="50" />
+          <Property Name="Adres" Type="text" />
+          <Property Name="Restorant_Tel" Type="varchar" MaxLength="50" />
+          <Property Name="il_id" Type="int" />
+          <Property Name="ilce_id" Type="int" />
+          <Property Name="Rol_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Table_Kullanicilar">
+          <Key>
+            <PropertyRef Name="Sq_id" />
+          </Key>
+          <Property Name="Sq_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Soyad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sifre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rol_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table_Roller">
+          <Key>
+            <PropertyRef Name="Sq_id" />
+          </Key>
+          <Property Name="Sq_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RolAdi" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ilce__il_id__60A75C0F">
+          <End Role="il" Type="Self.il" Multiplicity="0..1" />
+          <End Role="ilce" Type="Self.ilce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="il">
+              <PropertyRef Name="Sqid" />
+            </Principal>
+            <Dependent Role="ilce">
+              <PropertyRef Name="il_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Table_Isl__il_id__66603565">
+          <End Role="il" Type="Self.il" Multiplicity="0..1" />
+          <End Role="Table_IsletmeSahibi" Type="Self.Table_IsletmeSahibi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="il">
+              <PropertyRef Name="Sqid" />
+            </Principal>
+            <Dependent Role="Table_IsletmeSahibi">
+              <PropertyRef Name="il_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Table_Isl__ilce___6754599E">
+          <End Role="ilce" Type="Self.ilce" Multiplicity="0..1" />
+          <End Role="Table_IsletmeSahibi" Type="Self.Table_IsletmeSahibi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ilce">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Table_IsletmeSahibi">
+              <PropertyRef Name="ilce_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Table_Isl__Rol_i__68487DD7">
+          <End Role="Table_Roller" Type="Self.Table_Roller" Multiplicity="0..1" />
+          <End Role="Table_IsletmeSahibi" Type="Self.Table_IsletmeSahibi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Roller">
+              <PropertyRef Name="Sq_id" />
+            </Principal>
+            <Dependent Role="Table_IsletmeSahibi">
+              <PropertyRef Name="Rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Kullanicilar_Table_Roller">
+          <End Role="Table_Roller" Type="Self.Table_Roller" Multiplicity="1" />
+          <End Role="Table_Kullanicilar" Type="Self.Table_Kullanicilar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Roller">
+              <PropertyRef Name="Sq_id" />
+            </Principal>
+            <Dependent Role="Table_Kullanicilar">
+              <PropertyRef Name="Rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="diyetlineModelStoreContainer">
+          <EntitySet Name="il" EntityType="Self.il" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ilce" EntityType="Self.ilce" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_IsletmeSahibi" EntityType="Self.Table_IsletmeSahibi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Kullanicilar" EntityType="Self.Table_Kullanicilar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Roller" EntityType="Self.Table_Roller" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ilce__il_id__60A75C0F" Association="Self.FK__ilce__il_id__60A75C0F">
+            <End Role="il" EntitySet="il" />
+            <End Role="ilce" EntitySet="ilce" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Table_Isl__il_id__66603565" Association="Self.FK__Table_Isl__il_id__66603565">
+            <End Role="il" EntitySet="il" />
+            <End Role="Table_IsletmeSahibi" EntitySet="Table_IsletmeSahibi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Table_Isl__ilce___6754599E" Association="Self.FK__Table_Isl__ilce___6754599E">
+            <End Role="ilce" EntitySet="ilce" />
+            <End Role="Table_IsletmeSahibi" EntitySet="Table_IsletmeSahibi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Table_Isl__Rol_i__68487DD7" Association="Self.FK__Table_Isl__Rol_i__68487DD7">
+            <End Role="Table_Roller" EntitySet="Table_Roller" />
+            <End Role="Table_IsletmeSahibi" EntitySet="Table_IsletmeSahibi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Kullanicilar_Table_Roller" Association="Self.FK_Table_Kullanicilar_Table_Roller">
+            <End Role="Table_Roller" EntitySet="Table_Roller" />
+            <End Role="Table_Kullanicilar" EntitySet="Table_Kullanicilar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="diyetlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="il">
+          <Key>
+            <PropertyRef Name="Sqid" />
+          </Key>
+          <Property Name="Sqid" Type="Int32" Nullable="false" />
+          <Property Name="ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ilce" Relationship="Self.FK__ilce__il_id__60A75C0F" FromRole="il" ToRole="ilce" />
+          <NavigationProperty Name="Table_IsletmeSahibi" Relationship="Self.FK__Table_Isl__il_id__66603565" FromRole="il" ToRole="Table_IsletmeSahibi" />
+        </EntityType>
+        <EntityType Name="ilce">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="il_id" Type="Int32" />
+          <Property Name="ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="il" Relationship="Self.FK__ilce__il_id__60A75C0F" FromRole="ilce" ToRole="il" />
+          <NavigationProperty Name="Table_IsletmeSahibi" Relationship="Self.FK__Table_Isl__ilce___6754599E" FromRole="ilce" ToRole="Table_IsletmeSahibi" />
+        </EntityType>
+        <EntityType Name="Table_IsletmeSahibi">
+          <Key>
+            <PropertyRef Name="Sq_id" />
+          </Key>
+          <Property Name="Sq_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Restorant_Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Restorant_Sahibi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Restorant_SahibiTel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubeSorumlusu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubeSorumlusu_Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Restorant_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VergiNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TCNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Restorant_Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="il_id" Type="Int32" />
+          <Property Name="ilce_id" Type="Int32" />
+          <Property Name="Rol_id" Type="Int32" />
+          <NavigationProperty Name="il" Relationship="Self.FK__Table_Isl__il_id__66603565" FromRole="Table_IsletmeSahibi" ToRole="il" />
+          <NavigationProperty Name="ilce" Relationship="Self.FK__Table_Isl__ilce___6754599E" FromRole="Table_IsletmeSahibi" ToRole="ilce" />
+          <NavigationProperty Name="Table_Roller" Relationship="Self.FK__Table_Isl__Rol_i__68487DD7" FromRole="Table_IsletmeSahibi" ToRole="Table_Roller" />
+        </EntityType>
+        <EntityType Name="Table_Kullanicilar">
+          <Key>
+            <PropertyRef Name="Sq_id" />
+          </Key>
+          <Property Name="Sq_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rol_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Table_Roller" Relationship="Self.FK_Table_Kullanicilar_Table_Roller" FromRole="Table_Kullanicilar" ToRole="Table_Roller" />
+        </EntityType>
+        <EntityType Name="Table_Roller">
+          <Key>
+            <PropertyRef Name="Sq_id" />
+          </Key>
+          <Property Name="Sq_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RolAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Table_IsletmeSahibi" Relationship="Self.FK__Table_Isl__Rol_i__68487DD7" FromRole="Table_Roller" ToRole="Table_IsletmeSahibi" />
+          <NavigationProperty Name="Table_Kullanicilar" Relationship="Self.FK_Table_Kullanicilar_Table_Roller" FromRole="Table_Roller" ToRole="Table_Kullanicilar" />
+        </EntityType>
+        <Association Name="FK__ilce__il_id__60A75C0F">
+          <End Role="il" Type="Self.il" Multiplicity="0..1" />
+          <End Role="ilce" Type="Self.ilce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="il">
+              <PropertyRef Name="Sqid" />
+            </Principal>
+            <Dependent Role="ilce">
+              <PropertyRef Name="il_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Table_Isl__il_id__66603565">
+          <End Role="il" Type="Self.il" Multiplicity="0..1" />
+          <End Role="Table_IsletmeSahibi" Type="Self.Table_IsletmeSahibi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="il">
+              <PropertyRef Name="Sqid" />
+            </Principal>
+            <Dependent Role="Table_IsletmeSahibi">
+              <PropertyRef Name="il_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Table_Isl__ilce___6754599E">
+          <End Role="ilce" Type="Self.ilce" Multiplicity="0..1" />
+          <End Role="Table_IsletmeSahibi" Type="Self.Table_IsletmeSahibi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ilce">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Table_IsletmeSahibi">
+              <PropertyRef Name="ilce_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Table_Isl__Rol_i__68487DD7">
+          <End Role="Table_Roller" Type="Self.Table_Roller" Multiplicity="0..1" />
+          <End Role="Table_IsletmeSahibi" Type="Self.Table_IsletmeSahibi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Roller">
+              <PropertyRef Name="Sq_id" />
+            </Principal>
+            <Dependent Role="Table_IsletmeSahibi">
+              <PropertyRef Name="Rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Kullanicilar_Table_Roller">
+          <End Role="Table_Roller" Type="Self.Table_Roller" Multiplicity="1" />
+          <End Role="Table_Kullanicilar" Type="Self.Table_Kullanicilar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_Roller">
+              <PropertyRef Name="Sq_id" />
+            </Principal>
+            <Dependent Role="Table_Kullanicilar">
+              <PropertyRef Name="Rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DiyetlineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="il" EntityType="Self.il" />
+          <EntitySet Name="ilce" EntityType="Self.ilce" />
+          <EntitySet Name="Table_IsletmeSahibi" EntityType="Self.Table_IsletmeSahibi" />
+          <EntitySet Name="Table_Kullanicilar" EntityType="Self.Table_Kullanicilar" />
+          <EntitySet Name="Table_Roller" EntityType="Self.Table_Roller" />
+          <AssociationSet Name="FK__ilce__il_id__60A75C0F" Association="Self.FK__ilce__il_id__60A75C0F">
+            <End Role="il" EntitySet="il" />
+            <End Role="ilce" EntitySet="ilce" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Table_Isl__il_id__66603565" Association="Self.FK__Table_Isl__il_id__66603565">
+            <End Role="il" EntitySet="il" />
+            <End Role="Table_IsletmeSahibi" EntitySet="Table_IsletmeSahibi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Table_Isl__ilce___6754599E" Association="Self.FK__Table_Isl__ilce___6754599E">
+            <End Role="ilce" EntitySet="ilce" />
+            <End Role="Table_IsletmeSahibi" EntitySet="Table_IsletmeSahibi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Table_Isl__Rol_i__68487DD7" Association="Self.FK__Table_Isl__Rol_i__68487DD7">
+            <End Role="Table_Roller" EntitySet="Table_Roller" />
+            <End Role="Table_IsletmeSahibi" EntitySet="Table_IsletmeSahibi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Kullanicilar_Table_Roller" Association="Self.FK_Table_Kullanicilar_Table_Roller">
+            <End Role="Table_Roller" EntitySet="Table_Roller" />
+            <End Role="Table_Kullanicilar" EntitySet="Table_Kullanicilar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="diyetlineModelStoreContainer" CdmEntityContainer="DiyetlineEntities">
+          <EntitySetMapping Name="il">
+            <EntityTypeMapping TypeName="diyetlineModel.il">
+              <MappingFragment StoreEntitySet="il">
+                <ScalarProperty Name="Sqid" ColumnName="Sqid" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ilce">
+            <EntityTypeMapping TypeName="diyetlineModel.ilce">
+              <MappingFragment StoreEntitySet="ilce">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="il_id" ColumnName="il_id" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_IsletmeSahibi">
+            <EntityTypeMapping TypeName="diyetlineModel.Table_IsletmeSahibi">
+              <MappingFragment StoreEntitySet="Table_IsletmeSahibi">
+                <ScalarProperty Name="Sq_id" ColumnName="Sq_id" />
+                <ScalarProperty Name="Restorant_Adi" ColumnName="Restorant_Adi" />
+                <ScalarProperty Name="Restorant_Sahibi" ColumnName="Restorant_Sahibi" />
+                <ScalarProperty Name="Restorant_SahibiTel" ColumnName="Restorant_SahibiTel" />
+                <ScalarProperty Name="SubeSorumlusu" ColumnName="SubeSorumlusu" />
+                <ScalarProperty Name="SubeSorumlusu_Tel" ColumnName="SubeSorumlusu_Tel" />
+                <ScalarProperty Name="Restorant_Email" ColumnName="Restorant_Email" />
+                <ScalarProperty Name="VergiNo" ColumnName="VergiNo" />
+                <ScalarProperty Name="TCNo" ColumnName="TCNo" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Restorant_Tel" ColumnName="Restorant_Tel" />
+                <ScalarProperty Name="il_id" ColumnName="il_id" />
+                <ScalarProperty Name="ilce_id" ColumnName="ilce_id" />
+                <ScalarProperty Name="Rol_id" ColumnName="Rol_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Kullanicilar">
+            <EntityTypeMapping TypeName="diyetlineModel.Table_Kullanicilar">
+              <MappingFragment StoreEntitySet="Table_Kullanicilar">
+                <ScalarProperty Name="Sq_id" ColumnName="Sq_id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Rol_id" ColumnName="Rol_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Roller">
+            <EntityTypeMapping TypeName="diyetlineModel.Table_Roller">
+              <MappingFragment StoreEntitySet="Table_Roller">
+                <ScalarProperty Name="Sq_id" ColumnName="Sq_id" />
+                <ScalarProperty Name="RolAdi" ColumnName="RolAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -8,7 +8,7 @@ namespace DiyetLine
 {
     public class UserService
     {
-        public Table_Kullanıcılar ValidateUser(string email, string password)
+        public Table_Kullanicilar ValidateUser(string email, string password)
         {
             // Here you can write the code to validate
             // User from database and return accordingly
@@ -18,10 +18,10 @@ namespace DiyetLine
             var user = userList.FirstOrDefault(x => x.Email == email && x.Sifre == password);
             return user;
         }
-        private diyetlineEntities db = new diyetlineEntities();
-        public List<Table_Kullanıcılar> GetUserList()
+        private DiyetlineEntities db = new DiyetlineEntities();
+        public List<Table_Kullanicilar> GetUserList()
         {
-            return db.Table_Kullanıcılar.ToList();
+            return db.Table_Kullanicilar.ToList();
 
             // Create the list of user and return           
         }
