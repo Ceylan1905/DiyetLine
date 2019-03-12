@@ -12,6 +12,7 @@ using DiyetLine.Models;
 using Newtonsoft.Json;
 namespace DiyetLine.Controllers
 {
+    //Kübra bağlantı denemesi
     [RoutePrefix("api/Kullanıcılar")]
     [Authorize]
     public class KullanıcılarController : ApiController
