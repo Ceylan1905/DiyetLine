@@ -65,7 +65,19 @@
                                             </li>
                                             <li><a href="events.html">Events</a></li>
                                             <li><a href="@Url.Action("UyeOl", "Home")">Üye Ol</a></li>
-                                            <li><a href="@Url.Action("GirisYap", "Home")">Giriş Yap</a></li>
+                                            <li class="has-children">
+                                                <a href="@Url.Action("GirisYap", "Home")">Giriş Yap</a>
+                                               @if (Request.IsAuthenticated)
+                                               {
+                                                <ul class="dropdown arrow-top">
+                                                    <li><a href="@Url.Action("Profil", "Profil")">Profil</a></li>
+                                                    
+                                                    <li><a href="classes.html">Ayarlar</a></li>
+                                                    <li><a href="@Url.Action("CikisYap", "Home")">Çıkış Yap </a></li>
+                                                  
+                                                </ul>
+                                               }
+                                            </li>                                            
                                         </ul>
                                     </div>
                                 </nav>
@@ -172,5 +184,6 @@
                 }
             });
     </script>
+  
 </body>
 </html>

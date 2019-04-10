@@ -28,6 +28,7 @@ namespace DiyetLine.Models
         public Nullable<int> il_id { get; set; }
         public Nullable<int> ilce_id { get; set; }
         public Nullable<int> Rol_id { get; set; }
+        public string Sifre { get; set; }
     
         public virtual il il { get; set; }
         public virtual ilce ilce { get; set; }

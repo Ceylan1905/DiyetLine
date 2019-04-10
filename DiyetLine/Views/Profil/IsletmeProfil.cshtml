@@ -1,0 +1,414 @@
+﻿@model DiyetLine.Models.ViewModel
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        #vergi {
+            display: none;
+        }
+
+        #kimlik {
+            display: none;
+        }
+
+        #divSuccessMessage {
+            display: none;
+        }
+
+        #divFailMessage {
+            display: none;
+        }
+        #edit {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="width: 100%; z-index:2">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="#" style="font-weight: 200;font-size: 26px; font-family:P" layfair Display;">DiyetLine</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "Home")"><i class='fas fa-home' style='font-size:24px'></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link 2</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link 3</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:170px; height:100%; padding-top:50px;">
+
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event, 'Profil')">Profil</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event, 'Menüler')">Menüler</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event, 'Siparişler')">Siparişler</button>
+    </div>
+
+    <div style="margin-left:130px">
+
+
+        <div id="Profil" class="w3-container city" style="display:none; padding-left:50px; ">
+            <h2>Profil</h2>
+
+            <div class="container" style="padding-top:40px;">
+                <div class="row my-2">
+                    <div class="col-lg-8 order-lg-2">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profil</a>
+                            </li>
+                            <li class="nav-item" id="duzenle">
+                                <a href='@Url.Action("IsletmeProfil","Profil",new { IsletmeId = @ViewBag.id })' class="nav-link">Düzenle</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content py-4">
+                            <div class="tab-pane active" id="profile">
+                                <h5 class="mb-3">User Profile</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>About</h6>
+                                        <p>
+                                            Web Designer, UI/UX Engineer
+                                        </p>
+                                        <h6>Hobbies</h6>
+                                        <p>
+                                            Indie music, skiing and hiking. I love the great outdoors.
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>Recent badges</h6>
+                                        <a href="#" class="badge badge-dark badge-pill">html5</a>
+                                        <a href="#" class="badge badge-dark badge-pill">react</a>
+                                        <a href="#" class="badge badge-dark badge-pill">codeply</a>
+                                        <a href="#" class="badge badge-dark badge-pill">angularjs</a>
+                                        <a href="#" class="badge badge-dark badge-pill">css3</a>
+                                        <a href="#" class="badge badge-dark badge-pill">jquery</a>
+                                        <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
+                                        <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
+                                        <hr>
+                                        <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
+                                        <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
+                                        <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
+                                        <table class="table table-sm table-hover table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <div class="tab-pane" id="edit">
+                                @using (Html.BeginForm("IsletmeProfil", "Profil", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <form role="form">
+
+                                        @Html.HiddenFor(model => model.isletmesahibi.Sq_id)
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Restorant Adı</label>
+                                            <div class="col-lg-9">
+                                                @Html.EditorFor(model => model.isletmesahibi.Restorant_Adi, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.isletmesahibi.Restorant_Adi, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">İl Seçimi</label>
+                                            <div class="col-lg-9">
+                                                @if (ViewBag.illerList != null)
+                                                {
+                                                    @Html.DropDownListFor(model => model.IlId, ViewBag.illerList as SelectList, "--il Seçiniz--", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.IlId, "", new { @class = "text-danger" })
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">İlçe Seçimi</label>
+                                            <div class="col-lg-9">
+                                                @Html.DropDownListFor(model => model.IlceId, new SelectList(""), "--İlçe Seçiniz--", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.IlceId, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Ticari Tür</label>
+                                            <div class="col-lg-9">
+                                                <select id="ticaritur" class="form-control" size="0">
+                                                    <option value="secim">Seçiniz</option>
+                                                    <option value="sahis">Şahıs</option>
+                                                    <option value="diger">Diğer</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" id="vergi">
+                                            <label class="col-lg-3 col-form-label form-control-label">Vergi No</label>
+                                            <div class="col-lg-9">
+                                                @Html.EditorFor(model => model.isletmesahibi.VergiNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.isletmesahibi.VergiNo, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" id="kimlik">
+                                            <label class="col-lg-3 col-form-label form-control-label">TC No</label>
+                                            <div class="col-lg-9">
+                                                @Html.EditorFor(model => model.isletmesahibi.TCNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.isletmesahibi.TCNo, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Adres</label>
+                                            <div class="col-lg-9">
+                                                @Html.TextAreaFor(model => model.isletmesahibi.Adres, htmlAttributes: new { @class = "form-control", @cols = 30, @rows = 5 })
+                                                @Html.ValidationMessageFor(model => model.isletmesahibi.Adres, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Restorant Sahibi</label>
+                                            <div class="col-lg-9">
+                                                @Html.EditorFor(model => model.isletmesahibi.Restorant_Sahibi, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.isletmesahibi.Restorant_Sahibi, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Restorant Sahibi Telefon Numarası</label>
+                                            <div class="col-lg-9">
+                                                @Html.EditorFor(model => model.isletmesahibi.Restorant_SahibiTel, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.isletmesahibi.Restorant_SahibiTel, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Şube Sorumlusu</label>
+                                            <div class="col-lg-9">
+                                                @Html.EditorFor(model => model.isletmesahibi.SubeSorumlusu, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.isletmesahibi.SubeSorumlusu, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Şube Sorumlusu Telefon Numarası</label>
+                                            <div class="col-lg-9">
+                                                @Html.EditorFor(model => model.isletmesahibi.SubeSorumlusu_Tel, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.isletmesahibi.SubeSorumlusu_Tel, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Restorant Telefon Numarası</label>
+                                            <div class="col-lg-9">
+                                                @Html.EditorFor(model => model.isletmesahibi.Restorant_Tel, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.isletmesahibi.Restorant_Tel, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Restorant Email</label>
+                                            <div class="col-lg-9">
+                                                @Html.EditorFor(model => model.isletmesahibi.Restorant_Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.isletmesahibi.Restorant_Email, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Şifre</label>
+                                            <div class="col-lg-9">
+                                                @Html.EditorFor(model => model.isletmesahibi.Sifre, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                                @Html.ValidationMessageFor(model => model.isletmesahibi.Sifre, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <input type="reset" class="btn btn-secondary" value="İptal">
+                                            <input type="submit" class="btn btn-primary" value="Değişiklikleri Kaydet">
+                                        </div>
+
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 order-lg-1 text-center">
+                        <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+                        <h6 class="mt-2">Upload a different photo</h6>
+                        <label class="custom-file">
+                            <input type="file" id="file" class="custom-file-input">
+                            <span class="custom-file-control">Choose file</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="Siparişler" class="w3-container city" style="display:none; padding-left:100px;">
+            <h2>Menüler</h2>
+            <p>Paris is the capital of France.</p>
+            <p>The Paris area is one of the largest population centers in Europe, with more than 12 million inhabitants.</p>
+        </div>
+
+        <div id="Menüler" class="w3-container city" style="display:none; padding-left:100px;">
+            <h2>Siparişler</h2>
+            <p>Tokyo is the capital of Japan.</p>
+            <p>It is the center of the Greater Tokyo Area, and the most populous metropolitan area in the world.</p>
+        </div>
+
+    </div>
+    <script>
+    // sandbox disable popups
+    if (window.self !== window.top && window.name!="view1") {;
+      window.alert = function(){/*disable alert*/};
+      window.confirm = function(){/*disable confirm*/};
+      window.prompt = function(){/*disable prompt*/};
+      window.open = function(){/*disable open*/};
+    }
+
+    // prevent href=# click jump
+    document.addEventListener("DOMContentLoaded", function() {
+      var links = document.getElementsByTagName("A");
+      for(var i=0; i < links.length; i++) {
+        if(links[i].href.indexOf('#')!=-1) {
+          links[i].addEventListener("click", function(e) {
+          console.debug("prevent href=# click");
+              if (this.hash) {
+                if (this.hash=="#") {
+                  e.preventDefault();
+                  return false;
+                }
+                else {
+                  /*
+                  var el = document.getElementById(this.hash.replace(/#/, ""));
+                  if (el) {
+                    el.scrollIntoView(true);
+                  }
+                  */
+                }
+              }
+              return false;
+          })
+        }
+      }
+    }, false);
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#duzenle").click(function () {
+
+                $("#edit").css(
+                    {
+                        "visibility": "visible"
+                    }
+                );
+                $("#profile").css(
+                    {
+                        "visibility": "hidden"
+                    }
+                );
+            });
+        })
+
+    </script>
+    <script>
+
+        $(window).bind('scroll', function () {
+            var navHeight = 0; // custom nav height
+            ($(window).scrollTop() > navHeight) ?
+                $('nav').css("position","fixed") &&
+             $('.w3-sidebar w3-bar-block w3-light-grey w3-card').css("padding-top","50px"):
+              $('nav').css("position", "relative")
+
+        });
+    </script>
+    <script>
+        $("#IlId").change(function () {
+
+            $.get("/Home/GetIlcelerList", {
+                IlId: $("#IlId").val()
+
+            }, function (data) {
+                $("#IlceId").empty();
+                $.each(data, function (index, row) {
+                    $("#IlceId").append("<option value='" + row.id + "'>" + row.ad + "</option>")
+
+                });
+
+            });
+        })
+    </script>
+    <!--scripts loaded here-->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <script>
+
+                $("select#ticaritur").change(function () {
+                    var data = $("#ticaritur").val();
+                    if (data == "sahis") {
+                        $("#kimlik").show();
+                        $("#vergi").hide();
+                    }
+                    else if (data == "diger") {
+                        $("#vergi").show();
+                        $("#kimlik").hide();
+                    }
+                    else if (data == "secim") {
+                        $("#kimlik").hide();
+                        $("#vergi").hide();
+                    }
+                })
+
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+    </script>
+
+</body>
+</html>

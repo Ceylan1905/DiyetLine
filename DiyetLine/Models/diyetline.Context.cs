@@ -13,10 +13,10 @@ namespace DiyetLine.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DiyetlineEntities : DbContext
+    public partial class diyetlineEntities : DbContext
     {
-        public DiyetlineEntities()
-            : base("name=DiyetlineEntities")
+        public diyetlineEntities()
+            : base("name=diyetlineEntities")
         {
         }
     

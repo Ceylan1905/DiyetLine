@@ -8,20 +8,21 @@ namespace DiyetLine
 {
     public class UserService
     {
-        public Table_Kullanicilar ValidateUser(string email, string password)
+        public KullaniciIsletmeViewModel ValidateUser(string email, string password)
         {
             // Here you can write the code to validate
             // User from database and return accordingly
             // To test we use dummy list here
 
             var userList = GetUserList();
-            var user = userList.FirstOrDefault(x => x.Email == email && x.Sifre == password);
+            var user = userList.FirstOrDefault(x => x.isletme_sahibi.Restorant_Email == email && x.isletme_sahibi.Sifre == password || x.kullanici.Email==email && x.kullanici.Sifre==password);
             return user;
         }
-        private DiyetlineEntities db = new DiyetlineEntities();
-        public List<Table_Kullanicilar> GetUserList()
+        private diyetlineEntities db = new diyetlineEntities();
+        public List<KullaniciIsletmeViewModel> GetUserList()
         {
-            return db.Table_Kullanicilar.ToList();
+           List <KullaniciIsletmeViewModel> km = new List<KullaniciIsletmeViewModel>();
+            return km;
 
             // Create the list of user and return           
         }

@@ -1,0 +1,197 @@
+﻿@model DiyetLine.Models.ViewModel
+@{
+    ViewBag.Title = "IsletmeDuzenle";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        #vergi {
+            display: none;
+        }
+
+        #kimlik {
+            display: none;
+        }
+
+        #divSuccessMessage {
+            display: none;
+        }
+
+        #divFailMessage {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    ceylan
+    <div class="tab-pane" id="edit">
+       @using (Html.BeginForm())
+       {
+            @Html.AntiForgeryToken()
+            <form role="form">
+
+                @Html.HiddenFor(model => model.isletmesahibi.Sq_id)
+                @Html.HiddenFor(model => model.isletmesahibi.Rol_id)
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Restorant Adı</label>
+                    <div class="col-lg-9">
+                        @Html.EditorFor(model => model.isletmesahibi.Restorant_Adi, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.isletmesahibi.Restorant_Adi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">İl Seçimi</label>
+                    <div class="col-lg-9">
+                        @if (ViewBag.illerList != null)
+                        {
+                            @Html.DropDownListFor(model => model.IlId, ViewBag.illerList as SelectList, "--il Seçiniz--", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IlId, "", new { @class = "text-danger" })
+                        }
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">İlçe Seçimi</label>
+                    <div class="col-lg-9">
+                        @Html.DropDownListFor(model => model.IlceId, new SelectList(""), "--İlçe Seçiniz--", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IlceId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Ticari Tür</label>
+                    <div class="col-lg-9">
+                        <select id="ticaritur" class="form-control" size="0">
+                            <option value="secim">Seçiniz</option>
+                            <option value="sahis">Şahıs</option>
+                            <option value="diger">Diğer</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row" id="vergi">
+                    <label class="col-lg-3 col-form-label form-control-label">Vergi No</label>
+                    <div class="col-lg-9">
+                        @Html.EditorFor(model => model.isletmesahibi.VergiNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.isletmesahibi.VergiNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row" id="kimlik">
+                    <label class="col-lg-3 col-form-label form-control-label">TC No</label>
+                    <div class="col-lg-9">
+                        @Html.EditorFor(model => model.isletmesahibi.TCNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.isletmesahibi.TCNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Adres</label>
+                    <div class="col-lg-9">
+                        @Html.TextAreaFor(model => model.isletmesahibi.Adres, htmlAttributes: new { @class = "form-control", @cols = 30, @rows = 5 })
+                        @Html.ValidationMessageFor(model => model.isletmesahibi.Adres, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Restorant Sahibi</label>
+                    <div class="col-lg-9">
+                        @Html.EditorFor(model => model.isletmesahibi.Restorant_Sahibi, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.isletmesahibi.Restorant_Sahibi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Restorant Sahibi Telefon Numarası</label>
+                    <div class="col-lg-9">
+                        @Html.EditorFor(model => model.isletmesahibi.Restorant_SahibiTel, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.isletmesahibi.Restorant_SahibiTel, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Şube Sorumlusu</label>
+                    <div class="col-lg-9">
+                        @Html.EditorFor(model => model.isletmesahibi.SubeSorumlusu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.isletmesahibi.SubeSorumlusu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Şube Sorumlusu Telefon Numarası</label>
+                    <div class="col-lg-9">
+                        @Html.EditorFor(model => model.isletmesahibi.SubeSorumlusu_Tel, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.isletmesahibi.SubeSorumlusu_Tel, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Restorant Telefon Numarası</label>
+                    <div class="col-lg-9">
+                        @Html.EditorFor(model => model.isletmesahibi.Restorant_Tel, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.isletmesahibi.Restorant_Tel, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Restorant Email</label>
+                    <div class="col-lg-9">
+                        @Html.EditorFor(model => model.isletmesahibi.Restorant_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.isletmesahibi.Restorant_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Şifre</label>
+                    <div class="col-lg-9">
+                        @Html.EditorFor(model => model.isletmesahibi.Sifre, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                        @Html.ValidationMessageFor(model => model.isletmesahibi.Sifre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <input type="reset" class="btn btn-secondary" value="İptal">
+                    <input type="submit" class="btn btn-primary" value="Değişiklikleri Kaydet">
+                </div>
+
+            </form>
+        }
+    </div>
+    <script>
+        $("#IlId").change(function () {
+
+            $.get("/Home/GetIlcelerList", {
+                IlId: $("#IlId").val()
+
+            }, function (data) {
+                $("#IlceId").empty();
+                $.each(data, function (index, row) {
+                    $("#IlceId").append("<option value='" + row.id + "'>" + row.ad + "</option>")
+
+                });
+
+            });
+        })
+    </script>
+    <!--scripts loaded here-->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <script>
+
+                $("select#ticaritur").change(function () {
+                    var data = $("#ticaritur").val();
+                    if (data == "sahis") {
+                        $("#kimlik").show();
+                        $("#vergi").hide();
+                    }
+                    else if (data == "diger") {
+                        $("#vergi").show();
+                        $("#kimlik").hide();
+                    }
+                    else if (data == "secim") {
+                        $("#kimlik").hide();
+                        $("#vergi").hide();
+                    }
+                })
+</script>
+</body>
+

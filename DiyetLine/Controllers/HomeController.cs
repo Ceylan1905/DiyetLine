@@ -13,7 +13,7 @@ namespace DiyetLine.Controllers
 {
     public class HomeController : Controller
     {
-        DiyetlineEntities db = new DiyetlineEntities();
+        diyetlineEntities db = new diyetlineEntities();
         // GET: Home
         public ActionResult Index()
         {
@@ -41,34 +41,46 @@ namespace DiyetLine.Controllers
         [HttpPost]
         public ActionResult IsletmeSahibi_UyeOl(ViewModel isletme)
         {
-
-            using (var ctx = new DiyetlineEntities())
+            if (ModelState.IsValid)
             {
-                ctx.Table_IsletmeSahibi.Add(new Table_IsletmeSahibi()
+                try
                 {
-                    Sq_id = isletme.isletmesahibi.Sq_id,
-                    Restorant_Sahibi = isletme.isletmesahibi.Restorant_Sahibi,
-                    Restorant_Adi = isletme.isletmesahibi.Restorant_Adi,
-                    Restorant_Email = isletme.isletmesahibi.Restorant_Email,
-                    Restorant_SahibiTel = isletme.isletmesahibi.Restorant_SahibiTel,
-                    Restorant_Tel = isletme.isletmesahibi.Restorant_Tel,
-                    SubeSorumlusu_Tel = isletme.isletmesahibi.SubeSorumlusu,
-                    SubeSorumlusu = isletme.isletmesahibi.SubeSorumlusu,
-                    Adres = isletme.isletmesahibi.Adres,
-                    TCNo = isletme.isletmesahibi.TCNo != null ? isletme.isletmesahibi.TCNo.ToString() : String.Empty,
-                    VergiNo = isletme.isletmesahibi.VergiNo != null ? isletme.isletmesahibi.VergiNo.ToString() : String.Empty,
-                    il_id = isletme.IlId,
-                    ilce_id = isletme.IlceId,
-                    Rol_id = isletme.isletmesahibi.Rol_id = 3,
+                    using (var ctx = new diyetlineEntities())
+                    {
+                        ctx.Table_IsletmeSahibi.Add(new Table_IsletmeSahibi()
+                        {
+                            Sq_id = isletme.isletmesahibi.Sq_id,
+                            Restorant_Sahibi = isletme.isletmesahibi.Restorant_Sahibi,
+                            Restorant_Adi = isletme.isletmesahibi.Restorant_Adi,
+                            Restorant_Email = isletme.isletmesahibi.Restorant_Email,
+                            Restorant_SahibiTel = isletme.isletmesahibi.Restorant_SahibiTel,
+                            Restorant_Tel = isletme.isletmesahibi.Restorant_Tel,
+                            SubeSorumlusu_Tel = isletme.isletmesahibi.SubeSorumlusu,
+                            SubeSorumlusu = isletme.isletmesahibi.SubeSorumlusu,
+                            Adres = isletme.isletmesahibi.Adres,
+                            TCNo = isletme.isletmesahibi.TCNo != null ? isletme.isletmesahibi.TCNo.ToString() : String.Empty,
+                            VergiNo = isletme.isletmesahibi.VergiNo != null ? isletme.isletmesahibi.VergiNo.ToString() : String.Empty,
+                            il_id = isletme.IlId,
+                            ilce_id = isletme.IlceId,
+                            Sifre=isletme.isletmesahibi.Sifre,
+                            Rol_id = isletme.isletmesahibi.Rol_id = 3,
 
-                });
+                        });
 
-                ctx.SaveChanges();
-                return View(isletme);
+                        ctx.SaveChanges();
+                        ViewBag.success = "Kayıt işleminiz başarıyla gerçekleştirildi.";
+                    }
+
+                }
+                catch
+                {
+                    ViewBag.fail = "Kayıt işleminiz gerçekleştirilemedi.";
+                }
+                
             }
 
-           
-        }
+           return View(isletme);
+            }
       
         [HttpPost]
         public ActionResult UyeOl(Table_Kullanicilar user)
@@ -100,32 +112,49 @@ namespace DiyetLine.Controllers
                 FormsAuthentication.SignOut();
                 return View();
             }
-            return Redirect("Index");
-      
+            return RedirectToAction("Index");
+
         }
         [AllowAnonymous]
+        public ActionResult CikisYap()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+      
+        [AllowAnonymous]
         [HttpPost]
-        public ActionResult GirisYap(Table_Kullanicilar model, string returnurl)
+        public ActionResult GirisYap(KullaniciIsletmeViewModel model, string returnurl)
         {
             if (ModelState.IsValid)
             {
-                DiyetlineEntities db = new DiyetlineEntities();
-
-                //Aşağıdaki if komutu gönderilen mail ve şifre doğrultusunda kullanıcı kontrolu yapar. Eğer kullanıcı var ise login olur.
-                var result = db.Table_Kullanicilar.FirstOrDefault(x => x.Email == model.Email && x.Sifre == model.Sifre);
-                if(result!=null)
+                diyetlineEntities db = new diyetlineEntities();
+               
+                    //Aşağıdaki if komutu gönderilen mail ve şifre doğrultusunda kullanıcı kontrolu yapar. Eğer kullanıcı var ise login olur.
+                    var result1 = db.Table_IsletmeSahibi.FirstOrDefault(x => x.Restorant_Email == model.kullanici.Email && x.Sifre == model.kullanici.Sifre);
+                var result2 = db.Table_Kullanicilar.FirstOrDefault(x => x.Email == model.kullanici.Email && x.Sifre == model.kullanici.Sifre);
+                if (result1 != null)
+                    {
+                    model.isletme_sahibi.Restorant_Email=model.kullanici.Email;
+                    model.isletme_sahibi.Rol_id=model.kullanici.Rol_id = 3;
+                        FormsAuthentication.SetAuthCookie(model.isletme_sahibi.Restorant_Email, true);
+                        return RedirectToAction("Index", "Home");
+                    }
+                else if(result2 != null)
                 {
-                    FormsAuthentication.SetAuthCookie(model.Email, true);
+                    FormsAuthentication.SetAuthCookie(model.kullanici.Email, true);
                     return RedirectToAction("Index", "Home");
                 }
 
-                else
-                {
-                    ModelState.AddModelError("", "EMail veya şifre hatalı!");
+                    else
+                    {
+                        ModelState.AddModelError("", "EMail veya şifre hatalı!");
+                    }
                 }
-            }
+           
             return View(model);
         }
+      
 
        
     }

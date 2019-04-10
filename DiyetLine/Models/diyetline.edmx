@@ -38,6 +38,7 @@
           <Property Name="il_id" Type="int" />
           <Property Name="ilce_id" Type="int" />
           <Property Name="Rol_id" Type="int" />
+          <Property Name="Sifre" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Table_Kullanicilar">
           <Key>
@@ -186,6 +187,7 @@
           <Property Name="il_id" Type="Int32" />
           <Property Name="ilce_id" Type="Int32" />
           <Property Name="Rol_id" Type="Int32" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="il" Relationship="Self.FK__Table_Isl__il_id__66603565" FromRole="Table_IsletmeSahibi" ToRole="il" />
           <NavigationProperty Name="ilce" Relationship="Self.FK__Table_Isl__ilce___6754599E" FromRole="Table_IsletmeSahibi" ToRole="ilce" />
           <NavigationProperty Name="Table_Roller" Relationship="Self.FK__Table_Isl__Rol_i__68487DD7" FromRole="Table_IsletmeSahibi" ToRole="Table_Roller" />
@@ -271,7 +273,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DiyetlineEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="diyetlineEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="il" EntityType="Self.il" />
           <EntitySet Name="ilce" EntityType="Self.ilce" />
           <EntitySet Name="Table_IsletmeSahibi" EntityType="Self.Table_IsletmeSahibi" />
@@ -303,7 +305,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="diyetlineModelStoreContainer" CdmEntityContainer="DiyetlineEntities">
+        <EntityContainerMapping StorageEntityContainer="diyetlineModelStoreContainer" CdmEntityContainer="diyetlineEntities">
           <EntitySetMapping Name="il">
             <EntityTypeMapping TypeName="diyetlineModel.il">
               <MappingFragment StoreEntitySet="il">
@@ -338,6 +340,7 @@
                 <ScalarProperty Name="il_id" ColumnName="il_id" />
                 <ScalarProperty Name="ilce_id" ColumnName="ilce_id" />
                 <ScalarProperty Name="Rol_id" ColumnName="Rol_id" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

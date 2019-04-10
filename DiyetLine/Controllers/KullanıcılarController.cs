@@ -17,7 +17,7 @@ namespace DiyetLine.Controllers
     [Authorize]
     public class KullanıcılarController : ApiController
     {
-        private DiyetlineEntities db = new DiyetlineEntities();
+        private diyetlineEntities db = new diyetlineEntities();
         public KullanıcılarController()
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -90,7 +90,7 @@ namespace DiyetLine.Controllers
             if (!ModelState.IsValid)
                 return BadRequest("Not a valid model");
 
-            using (var ctx = new DiyetlineEntities())
+            using (var ctx = new diyetlineEntities())
             {
                 ctx.Table_Kullanicilar.Add(new Table_Kullanicilar()
                 {

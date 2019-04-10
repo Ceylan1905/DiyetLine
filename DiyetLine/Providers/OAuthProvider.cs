@@ -22,23 +22,51 @@ namespace DiyetLine.Providers
                 var user = userService.ValidateUser(userName, password);
                 if (user != null)
                 {
-                    var claims = new List<Claim>()
+                    if (user.isletme_sahibi.Restorant_Email != null)
                     {
-                        new Claim(ClaimTypes.Sid, Convert.ToString(user.Sq_id)),
-                        new Claim(ClaimTypes.Name, user.Ad),
-                        new Claim(ClaimTypes.Email, user.Email)
+                        var claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.Sid, Convert.ToString(user.isletme_sahibi.Sq_id)),
+                        new Claim(ClaimTypes.Name, user.isletme_sahibi.Restorant_Adi),
+                        new Claim(ClaimTypes.Email, user.isletme_sahibi.Restorant_Email),
+                       new Claim(ClaimTypes.Role, Convert.ToString(user.isletme_sahibi.Rol_id))
                     };
-                    ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims,
-                                Startup.OAuthOptions.AuthenticationType);
+                        ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims,
+                                    Startup.OAuthOptions.AuthenticationType);
 
-                    var properties = CreateProperties(user.Ad);
-                    var ticket = new AuthenticationTicket(oAuthIdentity, properties);
-                    context.Validated(ticket);
+                        var properties = CreateProperties(user.isletme_sahibi.Restorant_Adi);
+                        var ticket = new AuthenticationTicket(oAuthIdentity, properties);
+                        context.Validated(ticket);
+                    }
+                    else
+                    {
+                        context.SetError("invalid_grant", "The user name or password is incorrect");
+                    }
                 }
-                else
+                else if(user.kullanici.Email!=null)
                 {
-                    context.SetError("invalid_grant", "The user name or password is incorrect");
-                }
+                  
+                        var claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.Sid, Convert.ToString(user.kullanici.Sq_id)),
+                        new Claim(ClaimTypes.Name, user.kullanici.Ad),
+                        new Claim(ClaimTypes.Email, user.kullanici.Email),
+                        new Claim(ClaimTypes.Role, Convert.ToString(user.kullanici.Rol_id))
+                    };
+                        ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims,
+                                    Startup.OAuthOptions.AuthenticationType);
+
+                        var properties = CreateProperties(user.kullanici.Ad);
+                        var ticket = new AuthenticationTicket(oAuthIdentity, properties);
+                        context.Validated(ticket);
+                    }
+                    else
+                    {
+                        context.SetError("invalid_grant", "The user name or password is incorrect");
+                    }
+
+
+                
             });
         }
         #endregion
